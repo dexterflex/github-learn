@@ -4,12 +4,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>github learn</title>
+    <title>Product Card</title>
+    <style>
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            max-width: 300px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .product-card img {
+            width: 100%;
+            border-radius: 4px;
+        }
+
+        .product-card h2 {
+            font-size: 1.5em;
+            margin: 16px 0;
+        }
+
+        .product-card p {
+            color: #666;
+        }
+
+        .product-card button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .product-card button:hover {
+            background-color: #218838;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>main</h1>
+    <div class="product-card" id="product-card">
+        <!-- Content will be injected here by JavaScript -->
+    </div>
+
+    <script>
+        const product = {
+            title: "Sample Product",
+            image: "https://via.placeholder.com/300",
+            price: 29.99,
+            discount: 0.10, // 10% discount
+            description: "This is a sample product description.",
+            available: true
+        };
+
+        function displayProduct(product) {
+            const productCard = document.getElementById('product-card');
+            const discountedPrice = product.price * (1 - product.discount);
+            const productHTML = `
+                <img src="${product.image}" alt="${product.title} Image">
+                <h2>${product.title}</h2>
+                <p>Price: $${product.price.toFixed(2)}</p>
+                <p>Discounted Price: $${discountedPrice.toFixed(2)}</p>
+                <p>${product.description}</p>
+                ${product.available ? '<button onclick="addToCart()">Add to Cart</button>' : '<p>Out of Stock</p>'}
+            `;
+            productCard.innerHTML = productHTML;
+        }
+
+        function addToCart() {
+            alert('Product has been added to the cart.');
+        }
+
+        // Initialize the product card
+        displayProduct(product);
+    </script>
+
 </body>
 
 </html>
